@@ -207,7 +207,24 @@ export default function Experience() {
                       display: 'inline-block',
                     }}
                   />
-                  {exp.company}
+                  {'companyUrl' in exp ? (
+                    <a
+                      href={(exp as { companyUrl: string }).companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: 'rgba(240,240,248,0.5)',
+                        textDecoration: 'none',
+                        transition: 'color 0.3s',
+                      }}
+                      onMouseEnter={(e) => ((e.target as HTMLElement).style.color = exp.color)}
+                      onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'rgba(240,240,248,0.5)')}
+                    >
+                      {exp.company} ↗
+                    </a>
+                  ) : (
+                    exp.company
+                  )}
                 </div>
 
                 {/* Description */}
@@ -237,7 +254,7 @@ export default function Experience() {
                     background: `${exp.color}08`,
                   }}
                 >
-                  {exp.type === 'founder' ? '⚡ Founder' : '💼 Full-Time'}
+                  {exp.type === 'founder' ? '⚡ Founder' : exp.company === 'Technanimals' ? '🏢 Software Engineer' : '💼 Full-Time'}
                 </div>
               </div>
 

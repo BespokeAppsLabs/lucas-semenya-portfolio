@@ -192,6 +192,47 @@ export const PROJECTS = [
     status: 'active',
     link: '#',
   },
+
+  // ── TECHNANIMALS (client work, 2024–2025) ─────────────────────────────────
+  {
+    id: 11,
+    title: 'Msaada',
+    category: 'Gig Economy · Platform',
+    description:
+      'Empowers gig workers across Uber Eats, Bolt, PicknPay ASAP, Mr D and more — rent-to-own gear, flexible payment plans, task management, and earnings tracking. Live in production serving thousands of SA gig workers.',
+    tech: ['React', 'Node.js', 'TypeScript', 'AWS', 'GraphQL'],
+    color: '#22D3EE',
+    size: 'medium',
+    status: 'shipped',
+    company: 'Technanimals',
+    link: 'https://msaada.app/',
+  },
+  {
+    id: 12,
+    title: 'NUM Case Portal',
+    category: 'Enterprise · Legal Systems',
+    description:
+      'Case Management System for the National Union of Mineworkers — centralised platform for initiating, tracking, and resolving legal cases involving lawyers, advocates, arbitrators, and service providers.',
+    tech: ['React', 'TypeScript', 'Node.js', 'GraphQL', 'AWS'],
+    color: '#F97316',
+    size: 'small',
+    status: 'shipped',
+    company: 'Technanimals',
+    link: 'https://technanimals.com/',
+  },
+  {
+    id: 13,
+    title: 'NSFAS Admin Portal',
+    category: 'GovTech · EdTech',
+    description:
+      'Student Accommodation Management System for the National Student Financial Aid Scheme — real-time availability tracking, automated allocation, and comprehensive reporting for SA educational institutions.',
+    tech: ['Angular', 'TypeScript', 'Node.js', 'AWS', 'GraphQL'],
+    color: '#A855F7',
+    size: 'small',
+    status: 'shipped',
+    company: 'Technanimals',
+    link: 'https://technanimals.com/',
+  },
 ]
 
 export const SKILL_GROUPS = [
@@ -236,6 +277,16 @@ export const EXPERIENCE = [
       'Leading a portfolio of AI-powered products, SaaS platforms, and autonomous agent systems serving clients across South Africa. Built BespokeHQ (AI orchestration platform), Bespoke CRM, Bespoke Mall, Malume, and the full agent swarm — FRIDAY, NOVA, ULTRON — from scratch.',
     type: 'founder',
     color: '#00FFD1',
+  },
+  {
+    title: 'Software Engineer',
+    company: 'Technanimals',
+    companyUrl: 'https://technanimals.com/',
+    period: '2024 – 2025',
+    description:
+      'Part of the engineering team at a Johannesburg software house. Contributed to production systems serving thousands of users and major SA institutions — including the Msaada gig-worker platform, the NUM Case Management System for the National Union of Mineworkers, and the NSFAS student accommodation admin portal.',
+    type: 'work',
+    color: '#22D3EE',
   },
   {
     title: 'Full Stack Developer',

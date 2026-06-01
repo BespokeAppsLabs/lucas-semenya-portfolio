@@ -177,25 +177,34 @@ export default function Projects() {
                   >
                     {project.category}
                   </div>
-                  {'status' in project && (
-                    <span
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 5,
-                        padding: '3px 10px',
-                        borderRadius: 100,
-                        fontSize: 10,
-                        fontWeight: 700,
-                        letterSpacing: '0.08em',
-                        textTransform: 'uppercase',
-                        border: '1px solid rgba(0,255,209,0.2)',
-                        color: '#00FFD1',
-                        background: 'rgba(0,255,209,0.06)',
-                      }}
-                    >
-                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#00FFD1', display: 'inline-block', animation: 'pulse 2s ease-in-out infinite' }} />
-                      Active
+                  {'status' in project && (() => {
+                    const shipped = (project as { status: string }).status === 'shipped'
+                    const c = shipped ? '#FFB800' : '#00FFD1'
+                    return (
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 5,
+                          padding: '3px 10px',
+                          borderRadius: 100,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          border: `1px solid ${c}30`,
+                          color: c,
+                          background: `${c}08`,
+                        }}
+                      >
+                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: c, display: 'inline-block', animation: shipped ? 'none' : 'pulse 2s ease-in-out infinite' }} />
+                        {shipped ? 'Shipped' : 'Active'}
+                      </span>
+                    )
+                  })()}
+                  {'company' in project && (
+                    <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(240,240,248,0.3)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                      via {(project as { company: string }).company}
                     </span>
                   )}
                 </div>
@@ -338,18 +347,31 @@ export default function Projects() {
                     pointerEvents: 'none',
                   }}
                 />
-                <div
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: project.color,
-                    marginBottom: 12,
-                    opacity: 0.8,
-                  }}
-                >
-                  {project.category}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: project.color,
+                      opacity: 0.8,
+                    }}
+                  >
+                    {project.category}
+                  </div>
+                  {'status' in project && (project as { status: string }).status === 'shipped' && (
+                    <span style={{
+                      padding: '2px 8px', borderRadius: 100, fontSize: 9, fontWeight: 700,
+                      letterSpacing: '0.08em', textTransform: 'uppercase',
+                      border: '1px solid #FFB80030', color: '#FFB800', background: '#FFB80008',
+                    }}>Shipped</span>
+                  )}
+                  {'company' in project && (
+                    <span style={{ fontSize: 9, fontWeight: 600, color: 'rgba(240,240,248,0.25)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                      via {(project as { company: string }).company}
+                    </span>
+                  )}
                 </div>
                 <h3
                   style={{
@@ -436,18 +458,27 @@ export default function Projects() {
                 >
                   {project.title.slice(0, 2)}
                 </div>
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: project.color,
-                    marginBottom: 8,
-                    opacity: 0.7,
-                  }}
-                >
-                  {project.category}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
+                  <span
+                    style={{
+                      fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
+                      textTransform: 'uppercase', color: project.color, opacity: 0.7,
+                    }}
+                  >
+                    {project.category}
+                  </span>
+                  {'status' in project && (project as { status: string }).status === 'shipped' && (
+                    <span style={{
+                      padding: '1px 7px', borderRadius: 100, fontSize: 9, fontWeight: 700,
+                      letterSpacing: '0.06em', textTransform: 'uppercase',
+                      border: '1px solid #FFB80030', color: '#FFB800',
+                    }}>Shipped</span>
+                  )}
+                  {'company' in project && (
+                    <span style={{ fontSize: 9, color: 'rgba(240,240,248,0.2)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      · {(project as { company: string }).company}
+                    </span>
+                  )}
                 </div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 10 }}>
                   {project.title}

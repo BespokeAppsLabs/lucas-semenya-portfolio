@@ -7,124 +7,189 @@ export const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export const HERO_ROLES = ['Founder', 'AI Builder', 'Engineer', 'Technologist', 'Creator']
+export const HERO_ROLES = [
+  'Founder',
+  'AI Builder',
+  'Full Stack Engineer',
+  'Product Architect',
+  'Creative Technologist',
+]
 
 export const SERVICES = [
   {
     number: '01',
     title: 'AI Application Development',
     description:
-      'Building intelligent, AI-native applications powered by Claude, custom LLM pipelines, and multi-agent orchestration systems that think and act autonomously.',
-    tags: ['Claude API', 'LLM Pipelines', 'Vector DB', 'RAG'],
+      'Building intelligent, AI-native applications powered by Claude, custom LLM pipelines, and multi-agent orchestration systems — from rapid prototypes to production platforms.',
+    tags: ['Claude API', 'LLM Pipelines', 'OpenClaw', 'Archon'],
     color: '#00FFD1',
   },
   {
     number: '02',
     title: 'Full Stack Engineering',
     description:
-      'End-to-end web and mobile development with React, Next.js, Node.js, and React Native — from zero to production-scale, built to last.',
-    tags: ['React', 'Next.js', 'Node.js', 'React Native'],
+      'End-to-end web and mobile development with React, Next.js, Node.js, Expo, and Convex — zero to production, built for scale and longevity.',
+    tags: ['React', 'Next.js', 'Node.js', 'Expo / RN'],
     color: '#FFB800',
   },
   {
     number: '03',
     title: 'Business Automation',
     description:
-      'Digitizing manual processes with purpose-built software — CRMs, fleet systems, inventory management, and intelligent workflow automation.',
-    tags: ['CRM', 'Fleet Mgmt', 'Automation', 'Integration'],
+      'Turning every manual process into a systemic bug — then fixing it. CRMs, agent pipelines, social media engines, document generation, and workflow orchestration.',
+    tags: ['CRM', 'Pipeline Automation', 'pgboss', 'Hono'],
     color: '#A855F7',
   },
   {
     number: '04',
     title: 'Creative Technology',
     description:
-      'Immersive 3D web experiences, interactive UX, and visually extraordinary digital products that set benchmarks and earn industry recognition.',
+      'Immersive 3D web experiences, interactive UX, and extraordinary digital products that win awards. WebGL, GSAP, and Three.js at the cutting edge.',
     tags: ['Three.js', 'WebGL', 'GSAP', 'Framer Motion'],
     color: '#FF6B6B',
   },
   {
     number: '05',
-    title: 'Digital Strategy & Consulting',
+    title: 'Platform & Product Strategy',
     description:
-      'Technology consulting for SMEs across Africa and beyond — architecture decisions, stack selection, and digital transformation at scale.',
-    tags: ['Architecture', 'Consulting', 'Scale', 'Africa Tech'],
+      'Architecture decisions, tech stack selection, and digital transformation for African SMEs — from MVP scoping to enterprise-scale system design.',
+    tags: ['Architecture', 'Consulting', 'SaaS', 'Africa Tech'],
     color: '#22D3EE',
   },
   {
     number: '06',
     title: 'AI Agent Systems',
     description:
-      'Designing and deploying autonomous AI agent networks — from single-purpose tools to full multi-agent orchestration platforms with real business impact.',
-    tags: ['Multi-Agent', 'Orchestration', 'Claude', 'MCP'],
+      'Designing and deploying autonomous agent networks — CEO agents, social media agents, network agents — full multi-agent orchestration platforms with real business impact.',
+    tags: ['Multi-Agent', 'Docker', 'Claude Code', 'GitHub Actions'],
     color: '#F97316',
   },
 ]
 
 export const PROJECTS = [
+  // ── LARGE (featured) ──────────────────────────────────────────────────────
   {
     id: 1,
-    title: 'Makalani Fleet',
-    category: 'Full Stack · Mobile',
+    title: 'BespokeHQ',
+    category: 'AI Platform · Agent Orchestration',
     description:
-      'Comprehensive fleet & bus management platform with real-time tracking, route optimization, driver management, and parent communication portals.',
-    tech: ['React', 'Node.js', 'MySQL', 'React Native'],
+      'The Agent Intelligence Layer powering Bespoke Applications Labs. A self-hostable, two-layer AI agent server built on Next.js that accepts tasks via chat, Telegram, webhooks, or cron. Dispatches ephemeral Docker containers running Claude Code to execute tasks autonomously — the backbone of a fully automated business.',
+    tech: ['Next.js', 'Node.js', 'Docker', 'Claude Code', 'SQLite / Drizzle', 'Vercel AI SDK'],
     color: '#00FFD1',
     size: 'large',
-    link: '#',
+    status: 'active',
+    link: 'https://github.com/BespokeAppsLab',
   },
   {
     id: 2,
-    title: 'Bespoke CRM',
-    category: 'AI · Automation',
+    title: 'Malume — Scholar Route Pro',
+    category: 'Mobile · SaaS · Transport',
     description:
-      'AI-powered email triage system with automated lead scoring, draft generation, and a 10-stage intelligent inbox pipeline running on Claude.',
-    tech: ['Next.js', 'Claude AI', 'PostgreSQL', 'Gmail API'],
+      'Multi-tenant B2B2C school transport platform. Parents get real-time child tracking. Drivers get route management and live session tools. Operators get full fleet visibility. Built on Expo 54, Convex real-time DB, and Clerk auth — deployed on both iOS and Android via EAS.',
+    tech: ['Expo 54', 'React Native', 'Convex', 'Clerk', 'NativeWind', 'Google Maps'],
     color: '#FFB800',
-    size: 'medium',
+    size: 'large',
+    status: 'active',
     link: '#',
   },
+
+  // ── MEDIUM ────────────────────────────────────────────────────────────────
   {
     id: 3,
-    title: 'FRIDAY Agent',
-    category: 'AI Systems',
+    title: 'Bespoke CRM',
+    category: 'AI · Automation · SaaS',
     description:
-      'Autonomous AI CEO agent with strategic reasoning, multi-agent orchestration, and full business intelligence stack.',
-    tech: ['Claude API', 'Node.js', 'Multi-Agent', 'MCP'],
+      'Agent-first CRM with a fully automated 10-stage email triage pipeline and AI social media content engine powered by Gemini Imagen 4. Built on @geekmidas/toolbox — a TypeScript monorepo framework authored by Lucas. The only human touch points are approval gates.',
+    tech: ['TypeScript', 'Hono', 'PostgreSQL', 'Gemini', 'pgboss', 'MinIO'],
     color: '#A855F7',
     size: 'medium',
+    status: 'active',
     link: '#',
   },
   {
     id: 4,
     title: 'Bespoke Mall',
-    category: 'Platform · Marketplace',
+    category: 'Platform · Retail OS',
     description:
-      'Town-square marketplace with AI product discovery, swipe-drop mechanics, and vendor analytics dashboard.',
-    tech: ['Next.js', 'Convex', 'Stripe', 'AI'],
+      'Digital Operating System for retail spaces. Provides free POS + marketplace tools to informal traders to capture intent data. Runs 11 × 4K screens across 8 SA locations. Includes a Credit Footprint Engine generating verifiable sales history for unbanked vendors.',
+    tech: ['Next.js', 'React Native', 'Convex', 'Flutterwave', 'Orange Pi 5+'],
     color: '#22D3EE',
-    size: 'small',
+    size: 'medium',
+    status: 'active',
     link: '#',
   },
   {
     id: 5,
-    title: 'No Pattern Cafe',
-    category: 'Mobile App',
+    title: 'FRIDAY — CEO Agent',
+    category: 'AI Agents · Orchestration',
     description:
-      'Full-featured cafe management and ordering app with POS integration and real-time order tracking.',
-    tech: ['React Native', 'Node.js', 'Sanity'],
+      'Bespoke Applications Labs\' autonomous CEO agent. Runs on OpenClaw. Handles pipeline monitoring, lead intake, morning briefs, weekly reviews, and orchestrates the full agent swarm. Tightly integrated with Bespoke CRM. Reports daily. Never sleeps.',
+    tech: ['OpenClaw', 'Archon', 'Claude API', 'Kokoro TTS', 'Bespoke CRM'],
+    color: '#F97316',
+    size: 'medium',
+    status: 'active',
+    link: '#',
+  },
+
+  // ── SMALL ─────────────────────────────────────────────────────────────────
+  {
+    id: 6,
+    title: 'Kolada Platform',
+    category: 'Hospitality · Web + Mobile',
+    description:
+      'Full-stack hospitality platform — DC-10 Ibiza-inspired landing page and a React Native mobile app, built as a Turborepo monorepo with Next.js 16 and Expo.',
+    tech: ['Next.js 16', 'Expo', 'Turborepo', 'Tailwind v4'],
     color: '#FF6B6B',
     size: 'small',
+    status: 'active',
     link: '#',
   },
   {
-    id: 6,
-    title: 'Brushstrokes',
-    category: 'Web · Design',
+    id: 7,
+    title: 'Bonram',
+    category: 'Luxury · Hire · Portal',
     description:
-      'Immersive creative agency website with gallery, portfolio showcase, and booking system for a South African art studio.',
-    tech: ['Next.js', 'Sanity', 'Framer Motion'],
-    color: '#F97316',
+      'Digital-first "Institutional Luxury" service portal for event and plant hire. Quote-First workflow for B2B/Government and luxury B2C clients. Real-time inventory availability with Convex.',
+    tech: ['Next.js', 'Convex', 'TypeScript', 'Tailwind'],
+    color: '#A855F7',
     size: 'small',
+    status: 'active',
+    link: '#',
+  },
+  {
+    id: 8,
+    title: 'Brushstrokes',
+    category: 'Web · Design Review Platform',
+    description:
+      'Design review and feedback platform — artists upload assets, clients submit structured feedback per design. Project workspaces, versioned assets, and binary reaction engine.',
+    tech: ['Next.js 16', 'React 19', 'Prisma 7', 'libSQL / Turso'],
+    color: '#00FFD1',
+    size: 'small',
+    status: 'active',
+    link: '#',
+  },
+  {
+    id: 9,
+    title: 'NOVA — Social Agent',
+    category: 'AI Agent · Content',
+    description:
+      'Bespoke\'s Social Media Strategist agent. Drafts, quality-reviews, and routes content across LinkedIn, X, Instagram, Facebook, and TikTok. All posts CRM-approved before publish.',
+    tech: ['OpenClaw', 'Claude API', 'Archon', 'Bespoke CRM'],
+    color: '#22D3EE',
+    size: 'small',
+    status: 'active',
+    link: '#',
+  },
+  {
+    id: 10,
+    title: 'Bespoke Networks',
+    category: 'Infrastructure · AI-Managed',
+    description:
+      'AI-managed smart-network lab unit. Minimises manual network admin by deploying specialised agents for infrastructure audits, bandwidth scaling, and security hardening.',
+    tech: ['Docker', 'BMAD', 'BespokeHQ', 'Network Agents'],
+    color: '#FFB800',
+    size: 'small',
+    status: 'active',
     link: '#',
   },
 ]
@@ -133,32 +198,32 @@ export const SKILL_GROUPS = [
   {
     category: 'Frontend',
     color: '#00FFD1',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
+    skills: ['React 19', 'Next.js 16', 'TypeScript', 'Tailwind v4', 'Framer Motion', 'GSAP'],
   },
   {
     category: 'Backend',
     color: '#FFB800',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'MySQL', 'REST APIs', 'GraphQL'],
+    skills: ['Node.js', 'Hono', 'Express', 'PostgreSQL', 'SQLite / libSQL', 'Convex'],
   },
   {
     category: 'Mobile',
     color: '#A855F7',
-    skills: ['React Native', 'Expo', 'iOS', 'Android'],
+    skills: ['Expo 54', 'React Native', 'NativeWind', 'EAS Build', 'iOS', 'Android'],
   },
   {
     category: 'AI / LLM',
     color: '#22D3EE',
-    skills: ['Claude API', 'LLM Pipelines', 'AI Agents', 'Prompt Engineering', 'RAG', 'Vector DB'],
+    skills: ['Claude API', 'OpenClaw', 'Archon', 'Gemini', 'LLM Pipelines', 'Prompt Engineering'],
   },
   {
     category: '3D / Creative',
     color: '#FF6B6B',
-    skills: ['Three.js', 'React Three Fiber', 'GSAP', 'WebGL', 'Framer Motion', 'Blender'],
+    skills: ['Three.js', 'React Three Fiber', 'WebGL / GLSL', 'GSAP ScrollTrigger', 'Blender'],
   },
   {
-    category: 'Tools & DevOps',
+    category: 'DevOps & Tools',
     color: '#F97316',
-    skills: ['Git', 'Docker', 'Vercel', 'Sanity', 'Supabase', 'GitHub Actions'],
+    skills: ['Docker', 'GitHub Actions', 'Vercel', 'MinIO', 'Drizzle ORM', 'pgboss'],
   },
 ]
 
@@ -168,7 +233,7 @@ export const EXPERIENCE = [
     company: 'Bespoke Applications Labs',
     period: '2023 – Present',
     description:
-      'Building AI-powered software products and leading a portfolio of web, mobile, and AI agent projects for clients across South Africa and beyond. Everything from CRMs and fleet systems to autonomous AI agent platforms.',
+      'Leading a portfolio of AI-powered products, SaaS platforms, and autonomous agent systems serving clients across South Africa. Built BespokeHQ (AI orchestration platform), Bespoke CRM, Bespoke Mall, Malume, and the full agent swarm — FRIDAY, NOVA, ULTRON — from scratch.',
     type: 'founder',
     color: '#00FFD1',
   },
@@ -177,7 +242,7 @@ export const EXPERIENCE = [
     company: 'Makalani Bus Service',
     period: '2023 – Present',
     description:
-      'Architected and developed a complete fleet management platform from ground up — driver apps, parent portals, admin dashboards, real-time tracking, and route optimization serving thousands of users.',
+      'Architected and delivered a complete fleet management platform from zero — driver apps, parent portals, admin dashboards, real-time GPS tracking, and route optimization. Serving active daily users across multiple routes.',
     type: 'work',
     color: '#FFB800',
   },
@@ -186,7 +251,7 @@ export const EXPERIENCE = [
     company: 'No Pattern Cafe',
     period: '2023',
     description:
-      'Built cross-platform mobile ordering and cafe management application with POS integration, real-time order tracking, and staff management flows.',
+      'Built a cross-platform mobile ordering and cafe management application with POS integration, real-time order tracking, and staff management flows — deployed to production on iOS and Android.',
     type: 'work',
     color: '#A855F7',
   },
@@ -195,5 +260,6 @@ export const EXPERIENCE = [
 export const SOCIAL = {
   github: 'https://github.com/BespokeAppsLab',
   linkedin: 'https://linkedin.com/in/lucas-semenya',
-  email: 'thereshi.l@gmail.com',
+  email: 'lucas@bespokeApps.co.za',
+  domain: 'lucassemenya.co.za',
 }

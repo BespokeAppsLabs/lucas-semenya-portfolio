@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const STATS = [
   { value: '3+', label: 'Years Building' },
-  { value: '10+', label: 'Projects Shipped' },
-  { value: '∞', label: 'Problems Solved' },
+  { value: '10+', label: 'Active Projects' },
+  { value: '6', label: 'AI Agents Running' },
   { value: '🇿🇦', label: 'South Africa' },
 ]
 
@@ -230,7 +230,7 @@ export default function About() {
               Current Focus
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['AI Agents', 'LLM Pipelines', 'Next.js 16', 'React Native', 'Multi-Agent Systems', 'WebGL'].map(
+              {['BespokeHQ', 'Malume Mobile', 'Bespoke CRM', 'OpenClaw Agents', 'Next.js 16', 'Expo 54', 'Convex', 'WebGL'].map(
                 (tech) => (
                   <span key={tech} className="tag">
                     {tech}

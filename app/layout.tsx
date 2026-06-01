@@ -18,13 +18,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Lucas Semenya — Founder, Engineer & AI Builder',
   description:
-    'Founder of Bespoke Applications Labs. Building AI-powered products, full-stack applications, and intelligent automation systems from South Africa.',
-  keywords: ['Lucas Semenya', 'Bespoke Applications Labs', 'AI Developer', 'Full Stack', 'South Africa'],
-  authors: [{ name: 'Lucas Semenya' }],
+    'Founder of Bespoke Applications Labs. Building AI-powered products, full-stack applications, and autonomous agent systems from South Africa.',
+  keywords: ['Lucas Semenya', 'Bespoke Applications Labs', 'AI Developer', 'Full Stack Engineer', 'South Africa', 'React', 'Next.js', 'AI Agents'],
+  authors: [{ name: 'Lucas Semenya', url: 'https://lucassemenya.co.za' }],
+  metadataBase: new URL('https://lucassemenya.co.za'),
   openGraph: {
     title: 'Lucas Semenya — Founder, Engineer & AI Builder',
-    description: 'Building AI-powered products from South Africa.',
+    description: 'Building AI-powered products and autonomous agent systems from South Africa.',
     type: 'website',
+    url: 'https://lucassemenya.co.za',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lucas Semenya — Founder, Engineer & AI Builder',
+    description: 'Building AI-powered products from South Africa.',
   },
 }
 

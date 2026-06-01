@@ -164,18 +164,40 @@ export default function Projects() {
               />
 
               <div>
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: project.color,
-                    marginBottom: 16,
-                    opacity: 0.8,
-                  }}
-                >
-                  {project.category}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: project.color,
+                      opacity: 0.8,
+                    }}
+                  >
+                    {project.category}
+                  </div>
+                  {'status' in project && (
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 5,
+                        padding: '3px 10px',
+                        borderRadius: 100,
+                        fontSize: 10,
+                        fontWeight: 700,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                        border: '1px solid rgba(0,255,209,0.2)',
+                        color: '#00FFD1',
+                        background: 'rgba(0,255,209,0.06)',
+                      }}
+                    >
+                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#00FFD1', display: 'inline-block', animation: 'pulse 2s ease-in-out infinite' }} />
+                      Active
+                    </span>
+                  )}
                 </div>
                 <h3
                   style={{
@@ -289,8 +311,8 @@ export default function Projects() {
             </div>
           ))}
 
-          {/* Row 2: medium cards (2 columns) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20, marginBottom: 20 }}>
+          {/* Row 2: medium cards (auto-fit, up to 3 columns) */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, marginBottom: 20 }}>
             {medium.map((project) => (
               <div
                 key={project.id}

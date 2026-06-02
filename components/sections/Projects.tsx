@@ -101,7 +101,7 @@ export default function Projects() {
           >
             <h2
               style={{
-                fontSize: 'clamp(36px, 5vw, 72px)',
+                fontSize: 'clamp(52px, 6.5vw, 96px)',
                 fontWeight: 900,
                 letterSpacing: '-0.04em',
                 lineHeight: 1.0,
@@ -249,24 +249,28 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={project.link}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: project.color,
-                    textDecoration: 'none',
-                    letterSpacing: '0.02em',
-                    transition: 'gap 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.gap = '14px')}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.gap = '8px')}
-                >
-                  View Project <span style={{ fontSize: 18 }}>→</span>
-                </a>
+                {project.link !== '#' && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: project.color,
+                      textDecoration: 'none',
+                      letterSpacing: '0.02em',
+                      transition: 'gap 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.gap = '14px')}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.gap = '8px')}
+                  >
+                    View Project <span style={{ fontSize: 18 }}>→</span>
+                  </a>
+                )}
               </div>
 
               {/* Visual placeholder */}
@@ -283,24 +287,38 @@ export default function Projects() {
                   overflow: 'hidden',
                 }}
               >
-                <div
-                  style={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: 20,
-                    background: `linear-gradient(135deg, ${project.color}40, ${project.color}15)`,
-                    border: `1px solid ${project.color}30`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 32,
-                    fontWeight: 900,
-                    color: project.color,
-                    letterSpacing: '-0.04em',
-                  }}
-                >
-                  {project.title.slice(0, 2)}
-                </div>
+                {'logo' in project ? (
+                  <img
+                    src={(project as { logo: string }).logo}
+                    alt={project.title}
+                    style={{
+                      maxWidth: '60%',
+                      maxHeight: '55%',
+                      objectFit: 'contain',
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: 80,
+                      height: 80,
+                      borderRadius: 20,
+                      background: `linear-gradient(135deg, ${project.color}40, ${project.color}15)`,
+                      border: `1px solid ${project.color}30`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 32,
+                      fontWeight: 900,
+                      color: project.color,
+                      letterSpacing: '-0.04em',
+                    }}
+                  >
+                    {project.title.slice(0, 2)}
+                  </div>
+                )}
                 {/* Decorative circles */}
                 {[60, 120, 200].map((size, i) => (
                   <div
@@ -386,7 +404,7 @@ export default function Projects() {
                 <p style={{ fontSize: 14, color: 'rgba(240,240,248,0.5)', lineHeight: 1.6, marginBottom: 24 }}>
                   {project.description}
                 </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 24 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {project.tech.map((t) => (
                     <span
                       key={t}
@@ -404,23 +422,6 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={project.link}
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: project.color,
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    transition: 'gap 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.gap = '12px')}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.gap = '6px')}
-                >
-                  View Project →
-                </a>
               </div>
             ))}
           </div>

@@ -68,7 +68,7 @@ export default function Navbar() {
             <span
               style={{
                 fontWeight: 600,
-                fontSize: 14,
+                fontSize: 18,
                 color: 'rgba(240,240,248,0.6)',
                 letterSpacing: '0.01em',
                 transition: 'color 0.3s',
@@ -86,7 +86,7 @@ export default function Navbar() {
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
                 style={{
-                  fontSize: 13,
+                  fontSize: 17,
                   fontWeight: 500,
                   color: 'rgba(240,240,248,0.55)',
                   letterSpacing: '0.02em',

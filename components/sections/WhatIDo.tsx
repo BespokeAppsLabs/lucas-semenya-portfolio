@@ -219,7 +219,7 @@ export default function WhatIDo() {
 
           <h2
             style={{
-              fontSize: 'clamp(36px, 5vw, 72px)',
+              fontSize: 'clamp(52px, 6.5vw, 96px)',
               fontWeight: 900,
               letterSpacing: '-0.04em',
               lineHeight: 1.0,

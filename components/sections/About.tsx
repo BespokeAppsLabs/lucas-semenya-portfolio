@@ -10,7 +10,7 @@ const STATS = [
   { value: '3+', label: 'Years Building' },
   { value: '10+', label: 'Active Projects' },
   { value: '6', label: 'AI Agents Running' },
-  { value: '🇿🇦', label: 'South Africa' },
+  { value: '5+', label: 'Clients' },
 ]
 
 export default function About() {
@@ -99,7 +99,7 @@ export default function About() {
 
           <h2
             style={{
-              fontSize: 'clamp(32px, 4vw, 56px)',
+              fontSize: 'clamp(48px, 6vw, 80px)',
               fontWeight: 800,
               letterSpacing: '-0.03em',
               lineHeight: 1.1,
@@ -135,7 +135,7 @@ export default function About() {
               and I build software that solves them permanently.
             </p>
             <p>
-              From fleet management platforms to AI CEO agents, I ship products that operate at scale and
+              From mobile and web applications to AI CEO agents, I ship products that operate at scale and
               create real impact for businesses across South Africa and beyond.
             </p>
           </div>
@@ -230,7 +230,7 @@ export default function About() {
               Current Focus
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['BespokeHQ', 'Malume Mobile', 'Bespoke CRM', 'OpenClaw Agents', 'Next.js 16', 'Expo 54', 'Convex', 'WebGL'].map(
+              {['BespokeHQ', 'Malome Mobile', 'Bespoke CRM', 'OpenClaw Agents', 'Next.js 16', 'Expo 54', 'Convex', 'WebGL'].map(
                 (tech) => (
                   <span key={tech} className="tag">
                     {tech}

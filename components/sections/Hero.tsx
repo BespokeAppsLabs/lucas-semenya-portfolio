@@ -77,7 +77,8 @@ export default function Hero() {
         minHeight: 640,
         display: 'flex',
         alignItems: 'center',
-        overflow: 'hidden',
+        overflowX: 'clip',
+        overflowY: 'visible',
         background: 'var(--bg)',
       }}
     >
@@ -163,18 +164,18 @@ export default function Hero() {
             }}
           />
           <span style={{ fontSize: 12, color: '#00FFD1', fontWeight: 600, letterSpacing: '0.08em' }}>
-            Johannesburg, South Africa
+            South Africa
           </span>
         </div>
 
         {/* Name */}
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ paddingBottom: '0.2em' }}>
           <h1
             ref={nameRef}
             style={{
               fontSize: 'clamp(56px, 10vw, 150px)',
               fontWeight: 900,
-              lineHeight: 0.9,
+              lineHeight: 1.0,
               letterSpacing: '-0.04em',
               opacity: 0,
               marginBottom: 28,
@@ -323,7 +324,6 @@ export default function Hero() {
           </span>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)' }} />
           {[
-            { label: 'GitHub', href: SOCIAL.github },
             { label: 'LinkedIn', href: SOCIAL.linkedin },
             { label: 'Email', href: `mailto:${SOCIAL.email}` },
           ].map((s) => (

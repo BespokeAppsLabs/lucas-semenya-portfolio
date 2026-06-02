@@ -12,6 +12,7 @@ export default function Contact() {
   const headingRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,9 +48,32 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus('sending')
-    // In production, wire up to your preferred email service
-    await new Promise((r) => setTimeout(r, 1500))
-    setStatus('sent')
+
+    const form = e.currentTarget
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      subject: (form.elements.namedItem('subject') as HTMLInputElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setStatus('sent')
+      } else {
+        const body = await res.json().catch(() => ({}))
+        setErrorMsg(body.error ?? 'Something went wrong. Please try again.')
+        setStatus('error')
+      }
+    } catch {
+      setErrorMsg('Network error. Please try again.')
+      setStatus('error')
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -127,7 +151,7 @@ export default function Contact() {
           {/* Quick links */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginTop: 32, flexWrap: 'wrap' }}>
             {[
-              { label: 'thereshi.l@gmail.com', href: `mailto:${SOCIAL.email}` },
+              { label: SOCIAL.email, href: `mailto:${SOCIAL.email}` },
               { label: 'GitHub', href: SOCIAL.github },
               { label: 'LinkedIn', href: SOCIAL.linkedin },
             ].map((link) => (
@@ -322,6 +346,9 @@ export default function Contact() {
               />
             </div>
 
+            {status === 'error' && (
+              <p style={{ color: '#FF6B6B', fontSize: 14, marginBottom: -8 }}>{errorMsg}</p>
+            )}
             <button
               type="submit"
               disabled={status === 'sending'}
@@ -356,7 +383,7 @@ export default function Contact() {
                 el.style.boxShadow = 'none'
               }}
             >
-              {status === 'sending' ? 'Sending...' : 'Send Message →'}
+              {status === 'sending' ? 'Sending...' : status === 'error' ? 'Try Again →' : 'Send Message →'}
             </button>
           </form>
         )}

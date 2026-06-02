@@ -69,26 +69,28 @@ export const SERVICES = [
 export const PROJECTS = [
   // ── LARGE (featured) ──────────────────────────────────────────────────────
   {
-    id: 1,
-    title: 'BespokeHQ',
-    category: 'AI Platform · Agent Orchestration',
+    id: 0,
+    title: 'CarShareNova',
+    category: 'Marketplace · Mobile · Web',
     description:
-      'The Agent Intelligence Layer powering Bespoke Applications Labs. A self-hostable, two-layer AI agent server built on Next.js that accepts tasks via chat, Telegram, webhooks, or cron. Dispatches ephemeral Docker containers running Claude Code to execute tasks autonomously — the backbone of a fully automated business.',
-    tech: ['Next.js', 'Node.js', 'Docker', 'Claude Code', 'SQLite / Drizzle', 'Vercel AI SDK'],
-    color: '#00FFD1',
+      'South Africa\'s peer-to-peer car rental marketplace — connecting vehicle owners directly with verified renters. Browse 240+ cars from economy to luxury supercars across Johannesburg, Cape Town, and Pretoria. Owners list for free, renters book in minutes, and every trip is covered by commercial insurance underwritten by Old Mutual Insure. iOS and Android apps live. Featured on CNBC Africa, 702 Money Show, Moneyweb, and ITWeb.',
+    tech: ['Next.js', 'React Native', 'Node.js', 'TypeScript', 'AWS'],
+    color: '#FF6B6B',
     size: 'large',
-    status: 'active',
-    link: 'https://github.com/BespokeAppsLab',
+    status: 'shipped',
+    company: 'Technanimals',
+    link: 'https://carsharenova.com',
+    logo: '/logos/carsharenova.png',
   },
   {
     id: 2,
-    title: 'Malume — Scholar Route Pro',
+    title: 'Malome — Scholar Route Pro',
     category: 'Mobile · SaaS · Transport',
     description:
       'Multi-tenant B2B2C school transport platform. Parents get real-time child tracking. Drivers get route management and live session tools. Operators get full fleet visibility. Built on Expo 54, Convex real-time DB, and Clerk auth — deployed on both iOS and Android via EAS.',
     tech: ['Expo 54', 'React Native', 'Convex', 'Clerk', 'NativeWind', 'Google Maps'],
     color: '#FFB800',
-    size: 'large',
+    size: 'medium',
     status: 'active',
     link: '#',
   },
@@ -132,6 +134,18 @@ export const PROJECTS = [
   },
 
   // ── SMALL ─────────────────────────────────────────────────────────────────
+  {
+    id: 1,
+    title: 'BespokeHQ',
+    category: 'AI Platform · Agent Orchestration',
+    description:
+      'The Agent Intelligence Layer powering Bespoke Applications Labs. A self-hostable, two-layer AI agent server built on Next.js that accepts tasks via chat, Telegram, webhooks, or cron. Dispatches ephemeral Docker containers running Claude Code to execute tasks autonomously — the backbone of a fully automated business.',
+    tech: ['Next.js', 'Node.js', 'Docker', 'Claude Code', 'SQLite / Drizzle', 'Vercel AI SDK'],
+    color: '#00FFD1',
+    size: 'small',
+    status: 'active',
+    link: 'https://github.com/BespokeAppsLab',
+  },
   {
     id: 6,
     title: 'Kolada Platform',
@@ -202,10 +216,11 @@ export const PROJECTS = [
       'Empowers gig workers across Uber Eats, Bolt, PicknPay ASAP, Mr D and more — rent-to-own gear, flexible payment plans, task management, and earnings tracking. Live in production serving thousands of SA gig workers.',
     tech: ['React', 'Node.js', 'TypeScript', 'AWS', 'GraphQL'],
     color: '#22D3EE',
-    size: 'medium',
+    size: 'large',
     status: 'shipped',
     company: 'Technanimals',
     link: 'https://msaada.app/',
+    logo: '/logos/msaada.png',
   },
   {
     id: 12,
@@ -274,7 +289,7 @@ export const EXPERIENCE = [
     company: 'Bespoke Applications Labs',
     period: '2023 – Present',
     description:
-      'Leading a portfolio of AI-powered products, SaaS platforms, and autonomous agent systems serving clients across South Africa. Built BespokeHQ (AI orchestration platform), Bespoke CRM, Bespoke Mall, Malume, and the full agent swarm — FRIDAY, NOVA, ULTRON — from scratch.',
+      'Leading a portfolio of AI-powered products, SaaS platforms, and autonomous agent systems serving clients across South Africa. Built BespokeHQ (AI orchestration platform), Bespoke CRM, Bespoke Mall, Malome, and the full agent swarm — FRIDAY, NOVA, ULTRON — from scratch.',
     type: 'founder',
     color: '#00FFD1',
   },
@@ -288,29 +303,11 @@ export const EXPERIENCE = [
     type: 'work',
     color: '#22D3EE',
   },
-  {
-    title: 'Full Stack Developer',
-    company: 'Makalani Bus Service',
-    period: '2023 – Present',
-    description:
-      'Architected and delivered a complete fleet management platform from zero — driver apps, parent portals, admin dashboards, real-time GPS tracking, and route optimization. Serving active daily users across multiple routes.',
-    type: 'work',
-    color: '#FFB800',
-  },
-  {
-    title: 'React Native Developer',
-    company: 'No Pattern Cafe',
-    period: '2023',
-    description:
-      'Built a cross-platform mobile ordering and cafe management application with POS integration, real-time order tracking, and staff management flows — deployed to production on iOS and Android.',
-    type: 'work',
-    color: '#A855F7',
-  },
 ]
 
 export const SOCIAL = {
   github: 'https://github.com/BespokeAppsLab',
-  linkedin: 'https://linkedin.com/in/lucas-semenya',
-  email: 'lucas@bespokeApps.co.za',
+  linkedin: 'https://www.linkedin.com/in/lucas-semenya-50665564/', // set profile to public in LinkedIn settings
+  email: 'lucas@bespokeapps.co.za',
   domain: 'lucassemenya.co.za',
 }

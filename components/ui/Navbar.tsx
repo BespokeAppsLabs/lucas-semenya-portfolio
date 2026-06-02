@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { NAV_LINKS, SOCIAL } from '@/lib/data'
+import Logo from '@/components/ui/Logo'
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null)
@@ -46,25 +47,7 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-3 group"
           >
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 10,
-                background: 'linear-gradient(135deg, #00FFD1, #FFB800)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 900,
-                fontSize: 14,
-                color: '#020208',
-                letterSpacing: '-0.02em',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              }}
-              className="group-hover:scale-110"
-            >
-              LS
-            </div>
+            <Logo size={36} animated={false} className="transition-transform duration-300 group-hover:scale-110" />
             <span
               style={{
                 fontWeight: 600,

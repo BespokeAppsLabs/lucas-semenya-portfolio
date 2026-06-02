@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   keywords: ['Lucas Semenya', 'Bespoke Applications Labs', 'AI Developer', 'Full Stack Engineer', 'South Africa', 'React', 'Next.js', 'AI Agents'],
   authors: [{ name: 'Lucas Semenya', url: 'https://lucassemenya.co.za' }],
   metadataBase: new URL('https://lucassemenya.co.za'),
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'Lucas Semenya — Founder, Engineer & AI Builder',
     description: 'Building AI-powered products and autonomous agent systems from South Africa.',

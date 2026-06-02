@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import Logo from '@/components/ui/Logo'
 
 export default function Preloader({ onDone }: { onDone: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -46,39 +47,8 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
     <div ref={containerRef} className="preloader">
       {/* Monogram */}
       <div ref={textRef} className="flex flex-col items-center gap-8">
-        <div className="relative">
-          <span
-            style={{
-              fontSize: 'clamp(60px, 10vw, 100px)',
-              fontWeight: 900,
-              letterSpacing: '-0.05em',
-              lineHeight: 1,
-              background: 'linear-gradient(135deg, #00FFD1 0%, #FFB800 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            LS
-          </span>
-          {/* Glow effect */}
-          <span
-            aria-hidden
-            style={{
-              position: 'absolute',
-              inset: 0,
-              fontSize: 'clamp(60px, 10vw, 100px)',
-              fontWeight: 900,
-              letterSpacing: '-0.05em',
-              lineHeight: 1,
-              color: '#00FFD1',
-              filter: 'blur(24px)',
-              opacity: 0.3,
-              userSelect: 'none',
-            }}
-          >
-            LS
-          </span>
+        <div className="relative" aria-label="Loading Lucas Semenya">
+          <Logo size={120} animated loop />
         </div>
 
         {/* Progress bar */}

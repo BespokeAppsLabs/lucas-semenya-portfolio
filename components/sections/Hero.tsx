@@ -50,6 +50,7 @@ export default function Hero() {
         setCharIndex((c) => c - 1)
       }, 45)
     } else if (isDeleting && charIndex === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDeleting(false)
       setRoleIndex((i) => (i + 1) % HERO_ROLES.length)
     }

@@ -40,7 +40,12 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
     }
 
     frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
+    // Safety fallback — ensures onDone is always called even if GSAP fails
+    const fallback = setTimeout(() => onDone(), 5000)
+    return () => {
+      cancelAnimationFrame(frame)
+      clearTimeout(fallback)
+    }
   }, [onDone])
 
   return (

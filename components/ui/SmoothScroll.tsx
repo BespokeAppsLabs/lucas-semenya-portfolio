@@ -11,10 +11,13 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
+    // Skip Lenis on touch devices — native mobile scroll is already smooth
+    // and Lenis's touchstart interception swallows taps on links
+    if ('ontouchstart' in window) return
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
     })
 
     lenisRef.current = lenis

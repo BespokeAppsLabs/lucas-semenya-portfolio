@@ -27,7 +27,7 @@ export default function Home() {
         style={{
           opacity: loaded ? 1 : 0,
           transition: 'opacity 0.5s ease',
-          pointerEvents: loaded ? 'all' : 'none',
+          pointerEvents: loaded ? 'auto' : 'none',
         }}
       >
         <Navbar />

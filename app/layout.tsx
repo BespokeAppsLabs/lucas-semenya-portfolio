@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import CustomCursor from '@/components/ui/CustomCursor'
 import SmoothScroll from '@/components/ui/SmoothScroll'
 
 const spaceGrotesk = Space_Grotesk({
@@ -54,10 +53,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col antialiased">
-        <SmoothScroll>
-          <CustomCursor />
-          {children}
-        </SmoothScroll>
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   )

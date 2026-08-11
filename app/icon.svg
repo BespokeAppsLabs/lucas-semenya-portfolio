@@ -1,36 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <defs>
-    <linearGradient id="ls" x1="8" y1="12" x2="92" y2="88" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#00FFD1"/>
-      <stop offset="0.38" stop-color="#00FFD1"/>
-      <stop offset="0.52" stop-color="#F7FFFF"/>
-      <stop offset="0.66" stop-color="#FFDA73"/>
-      <stop offset="1" stop-color="#FFB800"/>
-    </linearGradient>
-    <linearGradient id="glass" x1="12" y1="8" x2="88" y2="92" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#00FFD1" stop-opacity="0.18"/>
-      <stop offset="0.26" stop-color="#00FFD1" stop-opacity="0.58"/>
-      <stop offset="0.5" stop-color="#F7FFFF" stop-opacity="0.25"/>
-      <stop offset="0.74" stop-color="#FFDA73" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#FFB800" stop-opacity="0.2"/>
-    </linearGradient>
-    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <title>Lucas Semenya Infinity Logo</title>
-  <g transform="translate(50 50) rotate(-90) scale(1.18) translate(-50 -50)">
-    <path d="M50 15C66 15 72 32 50 50C28 68 22 85 45 85C60 85 70 82 72 72C74 62 66 55 58 48C50 41 45 36 38 28C32 20 38 15 50 15Z" stroke="url(#glass)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.32" filter="url(#glow)"/>
-    <path d="M50 15C66 15 72 32 50 50C28 68 22 85 45 85C60 85 70 82 72 72C74 62 66 55 58 48C50 41 45 36 38 28C32 20 38 15 50 15Z" stroke="url(#ls)" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-    <path d="M50 15C66 15 72 32 50 50C28 68 22 85 45 85C60 85 70 82 72 72C74 62 66 55 58 48C50 41 45 36 38 28C32 20 38 15 50 15Z" stroke="#F7FFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-    <path d="M50 15C66 15 72 32 50 50C28 68 22 85 45 85C60 85 70 82 72 72C74 62 66 55 58 48C50 41 45 36 38 28C32 20 38 15 50 15Z" stroke="#00FFD1" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.7 1.5" opacity="0.85"/>
-    <path d="M50 15C66 15 72 32 50 50C28 68 22 85 45 85C60 85 70 82 72 72C74 62 66 55 58 48C50 41 45 36 38 28C32 20 38 15 50 15Z" stroke="#FFDA73" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.65 1.6" opacity="0.82" transform="translate(2 -1)"/>
-    <circle cx="49.8" cy="15.3" r="1.2" fill="#FFF2B0"/>
-    <circle cx="55.8" cy="47.5" r="1.4" fill="#F7FFFF"/>
-    <circle cx="36.4" cy="62.2" r="0.9" fill="#00FFD1"/>
-    <circle cx="43.8" cy="84.6" r="0.9" fill="#FFDA73"/>
-    <circle cx="72.4" cy="70.7" r="0.9" fill="#FFDA73"/>
-    <circle cx="39.4" cy="29.6" r="0.9" fill="#00FFD1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Lucas Semenya</title>
+  <rect width="100" height="100" fill="#EDE9E1"/>
+  <g fill="#14120E">
+    <path d="M10 22h14v56H10z"/>
+    <path d="M10 66h30v12H10z"/>
+    <path d="M50 22h40v12H50z"/>
+    <path d="M50 22h12v34H50z"/>
+    <path d="M50 44h40v12H50z"/>
+    <path d="M78 44h12v34H78z"/>
+    <path d="M50 66h40v12H50z"/>
   </g>
 </svg>

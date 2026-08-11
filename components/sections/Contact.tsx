@@ -1,392 +1,128 @@
 'use client'
 
-import { useRef, useEffect, FormEvent, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useState } from 'react'
 import { SOCIAL } from '@/lib/data'
 
-gsap.registerPlugin(ScrollTrigger)
-
+/* Direct mailto and two links. No form — a form implies a queue, and a
+   founder taking select work answers directly. (DESIGN.md §6) */
 export default function Contact() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const headingRef = useRef<HTMLDivElement>(null)
-  const formRef = useRef<HTMLFormElement>(null)
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [clock, setClock] = useState('')
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current?.children ?? [],
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: headingRef.current, start: 'top 80%' },
-        }
+    const tick = () =>
+      setClock(
+        new Intl.DateTimeFormat('en-GB', {
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: 'Africa/Johannesburg',
+        }).format(new Date()),
       )
-
-      gsap.fromTo(
-        formRef.current,
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: formRef.current, start: 'top 80%' },
-        }
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
+    tick()
+    const id = setInterval(tick, 30000)
+    return () => clearInterval(id)
   }, [])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setStatus('sending')
-
-    const form = e.currentTarget
-    const data = {
-      name: (form.elements.namedItem('name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      subject: (form.elements.namedItem('subject') as HTMLInputElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
-    }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      if (res.ok) {
-        setStatus('sent')
-      } else {
-        const body = await res.json().catch(() => ({}))
-        setErrorMsg(body.error ?? 'Something went wrong. Please try again.')
-        setStatus('error')
-      }
-    } catch {
-      setErrorMsg('Network error. Please try again.')
-      setStatus('error')
-    }
-  }
-
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '16px 20px',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 12,
-    color: 'var(--white)',
-    fontSize: 15,
-    fontFamily: 'var(--font-space-grotesk)',
-    outline: 'none',
-    transition: 'border-color 0.3s ease, background 0.3s ease',
-  }
+  const label = {
+    fontSize: 10,
+    letterSpacing: '0.18em',
+    color: 'rgba(20,18,14,0.5)',
+    margin: '0 0 10px',
+  } as const
 
   return (
-    <section
-      ref={sectionRef}
-      id="contact"
-      style={{
-        padding: '140px 24px',
-        background: 'var(--bg)',
-        position: 'relative',
-      }}
-    >
-      {/* Ambient glow */}
+    <section id="contact" className="section" style={{ padding: '130px 28px 90px' }}>
+      <p className="eyebrow" style={{ marginBottom: 40 }}>
+        06 — Start something
+      </p>
+
+      <h2
+        className="display"
+        style={{
+          fontSize: 'clamp(2.6rem,10vw,9rem)',
+          lineHeight: 0.86,
+          letterSpacing: '-0.04em',
+          marginBottom: 44,
+        }}
+      >
+        <span style={{ display: 'block' }}>Let&rsquo;s build</span>
+        <span className="outline" style={{ display: 'block' }}>
+          the machine
+        </span>
+      </h2>
+
       <div
         style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: 600,
-          height: 600,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0,255,209,0.04), transparent 70%)',
-          pointerEvents: 'none',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))',
+          gap: 32,
+          borderTop: '1px solid rgba(20,18,14,0.2)',
+          paddingTop: 36,
         }}
-      />
-
-      <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        {/* Heading */}
-        <div ref={headingRef} style={{ marginBottom: 72, textAlign: 'center' }}>
-          <div className="section-label" style={{ marginBottom: 24, justifyContent: 'center' }}>
-            <span style={{ width: 24, height: 1, background: 'var(--teal)', display: 'block' }} />
-            Get In Touch
-            <span style={{ width: 24, height: 1, background: 'var(--teal)', display: 'block' }} />
-          </div>
-          <h2
-            style={{
-              fontSize: 'clamp(40px, 6vw, 90px)',
-              fontWeight: 900,
-              letterSpacing: '-0.04em',
-              lineHeight: 1.0,
-              marginBottom: 20,
-            }}
-          >
-            Let&apos;s build
-            <br />
-            <span className="gradient-text">something great.</span>
-          </h2>
-          <p
-            style={{
-              fontSize: 'clamp(15px, 1.8vw, 18px)',
-              color: 'rgba(240,240,248,0.45)',
-              lineHeight: 1.65,
-              maxWidth: 480,
-              margin: '0 auto',
-            }}
-          >
-            Have a project, idea, or opportunity? I&apos;d love to hear about it.
-            Drop a message and I&apos;ll get back to you within 24 hours.
+      >
+        <div>
+          <p className="mono" style={label}>
+            Email
           </p>
+          <a
+            href={`mailto:${SOCIAL.email}`}
+            className="display plain-link"
+            style={{
+              fontSize: 'clamp(1rem,1.8vw,1.5rem)',
+              letterSpacing: '-0.02em',
+              wordBreak: 'break-all',
+              textTransform: 'none',
+            }}
+          >
+            {SOCIAL.email}
+          </a>
+        </div>
 
-          {/* Quick links */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginTop: 32, flexWrap: 'wrap' }}>
-            {[
-              { label: SOCIAL.email, href: `mailto:${SOCIAL.email}` },
-              { label: 'GitHub', href: SOCIAL.github },
-              { label: 'LinkedIn', href: SOCIAL.linkedin },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: 'rgba(240,240,248,0.4)',
-                  letterSpacing: '0.03em',
-                  textDecoration: 'none',
-                  transition: 'color 0.3s ease',
-                }}
-                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#00FFD1')}
-                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'rgba(240,240,248,0.4)')}
-              >
-                {link.label}
-              </a>
-            ))}
+        <div>
+          <p className="mono" style={label}>
+            Elsewhere
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <a
+              href={SOCIAL.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono plain-link"
+              style={{ fontSize: 13, letterSpacing: '0.1em' }}
+            >
+              GitHub ↗
+            </a>
+            <a
+              href={SOCIAL.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono plain-link"
+              style={{ fontSize: 13, letterSpacing: '0.1em' }}
+            >
+              LinkedIn ↗
+            </a>
+            <a
+              href={SOCIAL.company}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono plain-link"
+              style={{ fontSize: 13, letterSpacing: '0.1em' }}
+            >
+              Bespoke Apps Labs ↗
+            </a>
           </div>
         </div>
 
-        {/* Form */}
-        {status === 'sent' ? (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '60px 40px',
-              borderRadius: 20,
-              border: '1px solid rgba(0,255,209,0.2)',
-              background: 'rgba(0,255,209,0.04)',
-            }}
-          >
-            <div style={{ fontSize: 48, marginBottom: 20 }}>✨</div>
-            <h3
-              style={{
-                fontSize: 28,
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                marginBottom: 12,
-                color: '#00FFD1',
-              }}
-            >
-              Message sent!
-            </h3>
-            <p style={{ color: 'rgba(240,240,248,0.5)', fontSize: 16 }}>
-              Thanks for reaching out. I&apos;ll get back to you shortly.
-            </p>
-          </div>
-        ) : (
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 20,
-            }}
-          >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'rgba(240,240,248,0.4)',
-                    marginBottom: 10,
-                  }}
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your name"
-                  style={inputStyle}
-                  onFocus={(e) => {
-                    const el = e.target as HTMLInputElement
-                    el.style.borderColor = 'rgba(0,255,209,0.4)'
-                    el.style.background = 'rgba(0,255,209,0.04)'
-                  }}
-                  onBlur={(e) => {
-                    const el = e.target as HTMLInputElement
-                    el.style.borderColor = 'rgba(255,255,255,0.08)'
-                    el.style.background = 'rgba(255,255,255,0.04)'
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                    color: 'rgba(240,240,248,0.4)',
-                    marginBottom: 10,
-                  }}
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="your@email.com"
-                  style={inputStyle}
-                  onFocus={(e) => {
-                    const el = e.target as HTMLInputElement
-                    el.style.borderColor = 'rgba(0,255,209,0.4)'
-                    el.style.background = 'rgba(0,255,209,0.04)'
-                  }}
-                  onBlur={(e) => {
-                    const el = e.target as HTMLInputElement
-                    el.style.borderColor = 'rgba(255,255,255,0.08)'
-                    el.style.background = 'rgba(255,255,255,0.04)'
-                  }}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(240,240,248,0.4)',
-                  marginBottom: 10,
-                }}
-              >
-                Subject
-              </label>
-              <input
-                type="text"
-                name="subject"
-                placeholder="What's this about?"
-                style={inputStyle}
-                onFocus={(e) => {
-                  const el = e.target as HTMLInputElement
-                  el.style.borderColor = 'rgba(0,255,209,0.4)'
-                  el.style.background = 'rgba(0,255,209,0.04)'
-                }}
-                onBlur={(e) => {
-                  const el = e.target as HTMLInputElement
-                  el.style.borderColor = 'rgba(255,255,255,0.08)'
-                  el.style.background = 'rgba(255,255,255,0.04)'
-                }}
-              />
-            </div>
-
-            <div>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(240,240,248,0.4)',
-                  marginBottom: 10,
-                }}
-              >
-                Message
-              </label>
-              <textarea
-                name="message"
-                required
-                placeholder="Tell me about your project, idea, or opportunity..."
-                rows={6}
-                style={{ ...inputStyle, resize: 'vertical', minHeight: 160 }}
-                onFocus={(e) => {
-                  const el = e.target as HTMLTextAreaElement
-                  el.style.borderColor = 'rgba(0,255,209,0.4)'
-                  el.style.background = 'rgba(0,255,209,0.04)'
-                }}
-                onBlur={(e) => {
-                  const el = e.target as HTMLTextAreaElement
-                  el.style.borderColor = 'rgba(255,255,255,0.08)'
-                  el.style.background = 'rgba(255,255,255,0.04)'
-                }}
-              />
-            </div>
-
-            {status === 'error' && (
-              <p style={{ color: '#FF6B6B', fontSize: 14, marginBottom: -8 }}>{errorMsg}</p>
-            )}
-            <button
-              type="submit"
-              disabled={status === 'sending'}
-              style={{
-                padding: '18px 48px',
-                borderRadius: 100,
-                background:
-                  status === 'sending'
-                    ? 'rgba(0,255,209,0.3)'
-                    : 'linear-gradient(135deg, #00FFD1, #00c4a0)',
-                color: '#020208',
-                fontWeight: 700,
-                fontSize: 16,
-                letterSpacing: '0.02em',
-                border: 'none',
-                alignSelf: 'flex-start',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease',
-                cursor: status === 'sending' ? 'wait' : 'pointer',
-                opacity: status === 'sending' ? 0.7 : 1,
-                fontFamily: 'var(--font-space-grotesk)',
-              }}
-              onMouseEnter={(e) => {
-                if (status !== 'sending') {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.transform = 'translateY(-2px)'
-                  el.style.boxShadow = '0 8px 30px rgba(0,255,209,0.4)'
-                }
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.transform = 'translateY(0)'
-                el.style.boxShadow = 'none'
-              }}
-            >
-              {status === 'sending' ? 'Sending...' : status === 'error' ? 'Try Again →' : 'Send Message →'}
-            </button>
-          </form>
-        )}
+        <div>
+          <p className="mono" style={label}>
+            Based in
+          </p>
+          <p className="mono" style={{ fontSize: 13, letterSpacing: '0.1em', margin: 0 }}>
+            South Africa
+            <br />
+            {/* Empty until the client effect runs — avoids a hydration mismatch. */}
+            {clock && `${clock} SAST`}
+          </p>
+        </div>
       </div>
     </section>
   )

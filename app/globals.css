@@ -1,289 +1,309 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #020208;
-  --bg-surface: #0a0a14;
-  --bg-card: #0d0d1a;
-  --teal: #00FFD1;
-  --amber: #FFB800;
-  --white: #f0f0f8;
-  --gray: #8888aa;
-  --border: rgba(255, 255, 255, 0.07);
-  --border-hover: rgba(0, 255, 209, 0.3);
+/* ── Tokens ────────────────────────────────────────────────────────────────
+   Two hues only: warm neutral + emerald. Two emerald values because neither
+   one passes contrast on both grounds — deep on bone, bright on ink.        */
+@theme {
+  --color-bone: #ede9e1;
+  --color-ink: #14120e;
+  --color-emerald: #0a9d67;
+  --color-emerald-bright: #1fd48f;
+
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-display: var(--font-archivo-black), sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--white);
-  --font-sans: var(--font-space-grotesk);
-  --font-mono: var(--font-geist-mono);
-}
-
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
-  scroll-behavior: auto;
-  background-color: var(--bg);
-  color: var(--white);
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--white);
-  font-family: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  margin: 0;
+  background: #ede9e1;
+  color: #14120e;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  cursor: none;
 }
 
-/* Hide default cursor globally */
-*, *::before, *::after {
-  cursor: none !important;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--teal);
-  border-radius: 2px;
-  opacity: 0.5;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--amber);
-}
-
-/* Text selection */
 ::selection {
-  background: rgba(0, 255, 209, 0.2);
-  color: var(--teal);
+  background: #0a9d67;
+  color: #ede9e1;
 }
 
-/* Utility classes */
-.gradient-text {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--amber) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.glass {
-  background: rgba(10, 10, 20, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
+@keyframes marq {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
-.glass-card {
-  background: rgba(13, 13, 26, 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
-.glass-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 40px rgba(0, 255, 209, 0.08), inset 0 0 40px rgba(0, 255, 209, 0.02);
+@keyframes riseIn {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to { opacity: 1; transform: none; }
 }
 
-.glow-teal {
-  box-shadow: 0 0 30px rgba(0, 255, 209, 0.3), 0 0 60px rgba(0, 255, 209, 0.1);
+@keyframes heroIn {
+  from { opacity: 0; transform: translate3d(0, 34px, 0); }
+  to { opacity: 1; transform: none; }
 }
 
-.glow-amber {
-  box-shadow: 0 0 30px rgba(255, 184, 0, 0.3), 0 0 60px rgba(255, 184, 0, 0.1);
+@keyframes ruleIn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
-/* Section base */
-.section {
-  padding: 120px 0;
-  position: relative;
+/* Hero entrance. Staggered by an inline animation-delay per element.
+   fill-mode is `backwards`, not `both`, on purpose: a filled-forwards
+   animation outranks inline styles permanently, which would leave the
+   parallax hook writing transforms that never paint. */
+.hero-in {
+  animation: heroIn 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) backwards;
 }
 
-/* Noise texture overlay */
-.noise::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 0;
+.hero-rule {
+  transform-origin: left center;
+  animation: ruleIn 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) backwards;
 }
 
-/* Magnetic button */
-.magnetic-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* Reveal animation base */
-.reveal {
+/* ── Motion ────────────────────────────────────────────────────────────────
+   [data-reveal] is only hidden once the hook has flagged the root, so a
+   JS failure or a reduced-motion preference leaves everything visible.      */
+[data-motion="on"] [data-reveal] {
   opacity: 0;
-  transform: translateY(40px);
 }
 
-/* Tag pill */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+[data-reveal].is-in {
+  animation: riseIn 0.75s cubic-bezier(0.16, 0.84, 0.44, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; animation: none !important; }
+  .marquee-track { animation: none !important; }
+  .hero-in,
+  .hero-rule { animation: none !important; }
+}
+
+/* ── Type roles ────────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
   text-transform: uppercase;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--gray);
-  transition: all 0.2s ease;
+  letter-spacing: -0.03em;
+  margin: 0;
 }
 
-.tag:hover {
-  border-color: var(--teal);
-  color: var(--teal);
-  background: rgba(0, 255, 209, 0.05);
+.mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
 }
 
-/* Number counter */
-.number-large {
-  font-size: clamp(80px, 12vw, 160px);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.04em;
+/* Section numeral + label. Emerald deep on bone; .on-ink swaps to bright. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #0a9d67;
+  margin: 0;
+}
+
+.outline {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.23);
-  user-select: none;
-  pointer-events: none;
+  -webkit-text-stroke: 2px #14120e;
 }
 
-/* Horizontal line separator */
-.h-line {
-  width: 100%;
-  height: 1px;
-  background: var(--border);
+/* ── Structure ─────────────────────────────────────────────────────────── */
+.section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 120px 28px;
 }
 
-/* Gradient border on cards */
-.gradient-border {
-  position: relative;
-  border-radius: 16px;
-}
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 1px;
-  background: linear-gradient(135deg, transparent 0%, rgba(0, 255, 209, 0.3) 50%, transparent 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.gradient-border:hover::before {
-  opacity: 1;
+.on-ink {
+  background: #14120e;
+  color: #ede9e1;
 }
 
-/* Preloader */
-.preloader {
+.on-ink .eyebrow,
+.on-ink .accent {
+  color: #1fd48f;
+}
+
+/* Blueprint substrate — sits above the page, never intercepts a pointer. */
+.grid-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  z-index: 60;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(#14120e 1px, transparent 1px),
+    linear-gradient(90deg, #14120e 1px, transparent 1px);
+  background-size: 100% 140px, 140px 100%;
 }
 
-/* Section label */
-.section-label {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+/* Anything sitting over the hero canvas — 11px mono is torn apart by the
+   lattice without it, and the damage scales with node count. */
+.scrim {
+  background: rgba(237, 233, 225, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(20, 18, 14, 0.1);
+}
+
+/* ── Components ────────────────────────────────────────────────────────── */
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--teal);
-  display: flex;
+  transition: color 0.25s ease;
+}
+.nav-link:hover {
+  color: #0a9d67;
+}
+
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: #14120e;
+  color: #ede9e1;
+  padding: 9px 16px;
+  border-radius: 100px;
+  transition: background 0.25s ease;
+}
+.nav-cta:hover {
+  background: #0a9d67;
+  color: #ede9e1;
+}
+
+.rule-link {
+  display: inline-flex;
   align-items: center;
   gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #14120e;
+  padding-bottom: 6px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.rule-link:hover {
+  color: #0a9d67;
+  border-color: #0a9d67;
 }
 
-.section-label::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: var(--teal);
+.plain-link {
+  transition: color 0.25s ease;
+}
+.plain-link:hover {
+  color: #0a9d67;
 }
 
-/* Grid noise background */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(0, 255, 209, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 209, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(20, 18, 14, 0.28);
+  border-radius: 100px;
+  padding: 5px 11px;
 }
 
-/* Animated gradient bg */
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.on-ink .tag {
+  border-color: rgba(237, 233, 225, 0.3);
+  color: rgba(237, 233, 225, 0.8);
 }
 
-.animated-gradient {
-  background: linear-gradient(-45deg, #020208, #0a0a18, #020212, #080810);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+/* Image slots. Striped until real photography lands — see DESIGN.md §5. */
+.shot {
+  position: relative;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(20, 18, 14, 0.09) 0 2px,
+    transparent 2px 11px
+  );
+  border: 1px solid rgba(20, 18, 14, 0.25);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  transition: border-color 0.3s ease;
+}
+.shot:hover {
+  border-color: #0a9d67;
 }
 
-/* Cursor */
-#cursor-dot {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--teal);
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.2s;
-  mix-blend-mode: difference;
+.shot-brief {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(20, 18, 14, 0.6);
+  white-space: pre-line;
 }
 
-#cursor-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 255, 209, 0.5);
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-              height 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-              border-color 0.3s ease,
-              opacity 0.3s ease;
+.svc-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 20px 36px;
+  align-items: start;
+  padding: 34px 12px;
+  border-bottom: 1px solid rgba(237, 233, 225, 0.22);
+  transition: background 0.35s ease;
+}
+.svc-row:hover {
+  background: rgba(31, 212, 143, 0.13);
 }
 
-#cursor-ring.expanded {
-  width: 64px;
-  height: 64px;
-  border-color: var(--amber);
-  background: rgba(255, 184, 0, 0.05);
+/* Full inversion on hover — the index rows are the only place the page
+   flips ground mid-section, which is why they read as interactive. */
+.idx-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  align-items: center;
+  padding: 24px 12px;
+  border-bottom: 1px solid rgba(20, 18, 14, 0.2);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.idx-row:hover {
+  background: #14120e;
+  color: #ede9e1;
+}
+
+.stack-cell {
+  background: #14120e;
+  padding: 32px 26px;
+  transition: background 0.3s ease;
+}
+.stack-cell:hover {
+  background: #1e1b15;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marq 38s linear infinite;
 }

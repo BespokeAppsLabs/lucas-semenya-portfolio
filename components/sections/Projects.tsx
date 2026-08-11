@@ -1,504 +1,243 @@
-'use client'
-
-import { useRef, useEffect } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PROJECTS } from '@/lib/data'
-
-gsap.registerPlugin(ScrollTrigger)
+import { FEATURED, PROJECT_INDEX, SWARM } from '@/lib/data'
 
 export default function Projects() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const headingRef = useRef<HTMLDivElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current?.children ?? [],
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: headingRef.current, start: 'top 80%' },
-        }
-      )
-
-      gsap.fromTo(
-        gridRef.current?.children ?? [],
-        { y: 60, opacity: 0, scale: 0.96 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: gridRef.current, start: 'top 75%' },
-        }
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
-
-  const featured = PROJECTS.filter((p) => p.size === 'large')
-  const medium = PROJECTS.filter((p) => p.size === 'medium')
-  const small = PROJECTS.filter((p) => p.size === 'small')
-
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      style={{
-        padding: '140px 24px',
-        background: 'var(--bg-surface)',
-        position: 'relative',
-      }}
-    >
-      {/* Top fade */}
+    <section id="work" className="section">
       <div
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 120,
-          background: 'linear-gradient(to bottom, var(--bg), transparent)',
-          pointerEvents: 'none',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          gap: 24,
+          marginBottom: 56,
         }}
-      />
-      {/* Bottom fade */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 120,
-          background: 'linear-gradient(to top, var(--bg), transparent)',
-          pointerEvents: 'none',
-        }}
-      />
+      >
+        <p className="eyebrow">03 — Selected work</p>
+        <p
+          className="mono"
+          style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(20,18,14,0.5)', margin: 0 }}
+        >
+          14 projects · 3 in production at national scale
+        </p>
+      </div>
 
-      <div style={{ maxWidth: 1400, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        {/* Heading */}
-        <div ref={headingRef} style={{ marginBottom: 80 }}>
-          <div className="section-label" style={{ marginBottom: 24 }}>
-            Projects
-          </div>
-          <div
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 96 }}>
+        {FEATURED.map((p) => (
+          <article
+            key={p.title}
+            data-parallax="0.04"
+            data-reveal
             style={{
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: 24,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
+              gap: 44,
+              alignItems: 'center',
             }}
           >
-            <h2
-              style={{
-                fontSize: 'clamp(52px, 6.5vw, 96px)',
-                fontWeight: 900,
-                letterSpacing: '-0.04em',
-                lineHeight: 1.0,
-              }}
-            >
-              Things I&apos;ve
-              <br />
-              <span className="gradient-text">built & shipped.</span>
-            </h2>
-            <p
-              style={{
-                maxWidth: 380,
-                fontSize: 16,
-                color: 'rgba(240,240,248,0.45)',
-                lineHeight: 1.65,
-              }}
-            >
-              A selection of products, platforms, and AI systems I&apos;ve engineered from idea to production.
-            </p>
-          </div>
-        </div>
-
-        {/* Bento grid */}
-        <div ref={gridRef}>
-          {/* Row 1: featured (full width) */}
-          {featured.map((project) => (
-            <div
-              key={project.id}
-              className="glass-card gradient-border"
-              style={{
-                marginBottom: 20,
-                padding: 'clamp(32px, 4vw, 56px)',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: 40,
-                alignItems: 'center',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.boxShadow = `0 0 60px ${project.color}15, inset 0 0 60px ${project.color}05`
-              }}
-              onMouseLeave={(e) => {
-                ;(e.currentTarget as HTMLElement).style.boxShadow = ''
-              }}
-            >
-              {/* Glow */}
-              <div
+            <div className="shot" style={{ aspectRatio: '16/11' }}>
+              <p className="shot-brief">{p.shot}</p>
+              <span
+                className="mono"
                 style={{
                   position: 'absolute',
-                  top: -60,
-                  right: -60,
-                  width: 240,
-                  height: 240,
-                  borderRadius: '50%',
-                  background: `radial-gradient(circle, ${project.color}20, transparent 70%)`,
-                  pointerEvents: 'none',
-                }}
-              />
-
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: project.color,
-                      opacity: 0.8,
-                    }}
-                  >
-                    {project.category}
-                  </div>
-                  {'status' in project && (() => {
-                    const shipped = (project as { status: string }).status === 'shipped'
-                    const c = shipped ? '#FFB800' : '#00FFD1'
-                    return (
-                      <span
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 5,
-                          padding: '3px 10px',
-                          borderRadius: 100,
-                          fontSize: 10,
-                          fontWeight: 700,
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                          border: `1px solid ${c}30`,
-                          color: c,
-                          background: `${c}08`,
-                        }}
-                      >
-                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: c, display: 'inline-block', animation: shipped ? 'none' : 'pulse 2s ease-in-out infinite' }} />
-                        {shipped ? 'Shipped' : 'Active'}
-                      </span>
-                    )
-                  })()}
-                  {'company' in project && (
-                    <span style={{ fontSize: 10, fontWeight: 600, color: 'rgba(240,240,248,0.3)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                      via {(project as { company: string }).company}
-                    </span>
-                  )}
-                </div>
-                <h3
-                  style={{
-                    fontSize: 'clamp(24px, 3.5vw, 44px)',
-                    fontWeight: 800,
-                    letterSpacing: '-0.03em',
-                    lineHeight: 1.1,
-                    marginBottom: 20,
-                  }}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 'clamp(14px, 1.6vw, 17px)',
-                    color: 'rgba(240,240,248,0.55)',
-                    lineHeight: 1.65,
-                    marginBottom: 28,
-                    maxWidth: 480,
-                  }}
-                >
-                  {project.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 32 }}>
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        padding: '5px 14px',
-                        borderRadius: 100,
-                        fontSize: 12,
-                        fontWeight: 600,
-                        letterSpacing: '0.04em',
-                        border: `1px solid ${project.color}25`,
-                        color: project.color,
-                        background: `${project.color}08`,
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                {project.link !== '#' && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: project.color,
-                      textDecoration: 'none',
-                      letterSpacing: '0.02em',
-                      transition: 'gap 0.3s ease',
-                    }}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.gap = '14px')}
-                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.gap = '8px')}
-                  >
-                    View Project <span style={{ fontSize: 18 }}>→</span>
-                  </a>
-                )}
-              </div>
-
-              {/* Visual placeholder */}
-              <div
-                style={{
-                  height: 'clamp(180px, 25vw, 300px)',
-                  borderRadius: 12,
-                  background: `linear-gradient(135deg, ${project.color}15, ${project.color}05)`,
-                  border: `1px solid ${project.color}20`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                  overflow: 'hidden',
+                  top: 16,
+                  left: 16,
+                  fontSize: 10,
+                  letterSpacing: '0.16em',
+                  background: '#14120E',
+                  color: '#EDE9E1',
+                  padding: '5px 10px',
                 }}
               >
-                {'logo' in project ? (
-                  <img
-                    src={(project as { logo: string }).logo}
-                    alt={project.title}
-                    style={{
-                      maxWidth: '60%',
-                      maxHeight: '55%',
-                      objectFit: 'contain',
-                      position: 'relative',
-                      zIndex: 1,
-                    }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: 20,
-                      background: `linear-gradient(135deg, ${project.color}40, ${project.color}15)`,
-                      border: `1px solid ${project.color}30`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: 32,
-                      fontWeight: 900,
-                      color: project.color,
-                      letterSpacing: '-0.04em',
-                    }}
-                  >
-                    {project.title.slice(0, 2)}
-                  </div>
-                )}
-                {/* Decorative circles */}
-                {[60, 120, 200].map((size, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      position: 'absolute',
-                      width: size,
-                      height: size,
-                      borderRadius: '50%',
-                      border: `1px solid ${project.color}${12 - i * 3}`,
-                      animation: `spin ${8 + i * 4}s linear infinite`,
-                      animationDirection: i % 2 === 0 ? 'normal' : 'reverse',
-                    }}
-                  />
-                ))}
-              </div>
+                {p.status}
+              </span>
             </div>
-          ))}
 
-          {/* Row 2: medium cards (auto-fit, up to 3 columns) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, marginBottom: 20 }}>
-            {medium.map((project) => (
-              <div
-                key={project.id}
-                className="glass-card gradient-border"
-                style={{ padding: 32, position: 'relative', overflow: 'hidden' }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.boxShadow = `0 0 40px ${project.color}12`
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = ''
-                }}
-              >
-                <div
+            <div>
+              <p className="eyebrow" style={{ letterSpacing: '0.16em', marginBottom: 14 }}>
+                {p.category}
+              </p>
+
+              {/* ponytail: plain img — these render at 44px tall, the
+                  optimiser has nothing to win. Msaada is low-res: do not
+                  scale it above 44px without a vector from the client. */}
+              {p.logo && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={p.logo}
+                  alt={`${p.title} logo`}
                   style={{
-                    position: 'absolute',
-                    top: -40,
-                    right: -40,
-                    width: 150,
-                    height: 150,
-                    borderRadius: '50%',
-                    background: `radial-gradient(circle, ${project.color}18, transparent 70%)`,
-                    pointerEvents: 'none',
+                    display: 'block',
+                    height: 44,
+                    width: 'auto',
+                    maxWidth: 220,
+                    objectFit: 'contain',
+                    objectPosition: 'left center',
+                    margin: '0 0 18px',
                   }}
                 />
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: project.color,
-                      opacity: 0.8,
-                    }}
-                  >
-                    {project.category}
-                  </div>
-                  {'status' in project && (project as { status: string }).status === 'shipped' && (
-                    <span style={{
-                      padding: '2px 8px', borderRadius: 100, fontSize: 9, fontWeight: 700,
-                      letterSpacing: '0.08em', textTransform: 'uppercase',
-                      border: '1px solid #FFB80030', color: '#FFB800', background: '#FFB80008',
-                    }}>Shipped</span>
-                  )}
-                  {'company' in project && (
-                    <span style={{ fontSize: 9, fontWeight: 600, color: 'rgba(240,240,248,0.25)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                      via {(project as { company: string }).company}
-                    </span>
-                  )}
-                </div>
-                <h3
-                  style={{
-                    fontSize: 'clamp(20px, 2.5vw, 28px)',
-                    fontWeight: 800,
-                    letterSpacing: '-0.03em',
-                    marginBottom: 14,
-                  }}
-                >
-                  {project.title}
-                </h3>
-                <p style={{ fontSize: 14, color: 'rgba(240,240,248,0.5)', lineHeight: 1.6, marginBottom: 24 }}>
-                  {project.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        padding: '4px 10px',
-                        borderRadius: 100,
-                        fontSize: 11,
-                        fontWeight: 600,
-                        border: `1px solid ${project.color}25`,
-                        color: project.color,
-                        background: `${project.color}08`,
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+              )}
 
-          {/* Row 3: small cards (3 columns) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 }}>
-            {small.map((project) => (
-              <div
-                key={project.id}
-                className="glass-card gradient-border"
-                style={{ padding: '28px 24px' }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.boxShadow = `0 0 30px ${project.color}10`
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = ''
+              <h3
+                className="display"
+                style={{
+                  fontSize: 'clamp(2rem,4vw,3.4rem)',
+                  lineHeight: 0.94,
+                  marginBottom: 20,
                 }}
               >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 10,
-                    background: `${project.color}15`,
-                    border: `1px solid ${project.color}25`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 14,
-                    fontWeight: 800,
-                    color: project.color,
-                    marginBottom: 20,
-                  }}
-                >
-                  {project.title.slice(0, 2)}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
-                  <span
-                    style={{
-                      fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                      textTransform: 'uppercase', color: project.color, opacity: 0.7,
-                    }}
-                  >
-                    {project.category}
-                  </span>
-                  {'status' in project && (project as { status: string }).status === 'shipped' && (
-                    <span style={{
-                      padding: '1px 7px', borderRadius: 100, fontSize: 9, fontWeight: 700,
-                      letterSpacing: '0.06em', textTransform: 'uppercase',
-                      border: '1px solid #FFB80030', color: '#FFB800',
-                    }}>Shipped</span>
-                  )}
-                  {'company' in project && (
-                    <span style={{ fontSize: 9, color: 'rgba(240,240,248,0.2)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                      · {(project as { company: string }).company}
-                    </span>
-                  )}
-                </div>
-                <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 10 }}>
-                  {project.title}
-                </h3>
-                <p style={{ fontSize: 13, color: 'rgba(240,240,248,0.45)', lineHeight: 1.6 }}>
-                  {project.description}
-                </p>
-              </div>
-            ))}
-          </div>
+                {p.title}
+              </h3>
+
+              <p
+                style={{
+                  margin: '0 0 22px',
+                  fontSize: '1.02rem',
+                  lineHeight: 1.62,
+                  color: 'rgba(20,18,14,0.72)',
+                  maxWidth: 600,
+                  textWrap: 'pretty',
+                }}
+              >
+                {p.description}
+              </p>
+
+              <ul
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 8,
+                  listStyle: 'none',
+                  margin: '0 0 24px',
+                  padding: 0,
+                }}
+              >
+                {p.tech.map((t) => (
+                  <li key={t} className="tag">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <a href={p.link} target="_blank" rel="noopener noreferrer" className="rule-link">
+                Visit project →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* The swarm. Sits between the featured work and the index because the
+          agents are built products — and because the hero lattice has been
+          depicting them since the first byte with nothing to explain it. */}
+      <div style={{ marginTop: 96, borderTop: '1px solid rgba(20,18,14,0.2)', paddingTop: 34 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+            gap: 16,
+            marginBottom: 40,
+          }}
+        >
+          <p className="eyebrow">The swarm</p>
+          <p
+            className="mono"
+            style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(20,18,14,0.5)', margin: 0 }}
+          >
+            3 agents running · autonomous
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,260px),1fr))',
+            gap: 40,
+          }}
+        >
+          {SWARM.map((a) => (
+            <article key={a.name} data-reveal>
+              <h3
+                className="display"
+                style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)', lineHeight: 1, marginBottom: 8 }}
+              >
+                {a.name}
+              </h3>
+              <p className="eyebrow" style={{ letterSpacing: '0.16em', marginBottom: 16 }}>
+                {a.role}
+              </p>
+              <p
+                style={{
+                  margin: '0 0 16px',
+                  fontSize: '0.98rem',
+                  lineHeight: 1.6,
+                  color: 'rgba(20,18,14,0.72)',
+                  textWrap: 'pretty',
+                }}
+              >
+                {a.description}
+              </p>
+              <ul
+                className="mono"
+                style={{
+                  listStyle: 'none',
+                  margin: 0,
+                  padding: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                  fontSize: 10,
+                  letterSpacing: '0.14em',
+                  color: 'rgba(20,18,14,0.5)',
+                }}
+              >
+                {a.facts.map((f) => (
+                  <li key={f}>— {f}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
 
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
+      <div style={{ marginTop: 96, borderTop: '1px solid rgba(20,18,14,0.2)' }}>
+        {PROJECT_INDEX.map((p) => (
+          <a key={p.title} href={p.link} className="idx-row">
+            <span
+              className="display"
+              style={{
+                fontSize: 'clamp(1.05rem,2vw,1.6rem)',
+                letterSpacing: '-0.02em',
+                flex: '1 1 220px',
+                minWidth: 0,
+              }}
+            >
+              {p.title}
+            </span>
+            <span
+              className="mono"
+              style={{
+                fontSize: 10,
+                letterSpacing: '0.14em',
+                opacity: 0.65,
+                flex: '0 1 190px',
+                minWidth: 0,
+              }}
+            >
+              {p.category}
+            </span>
+            <span style={{ fontSize: '0.92rem', lineHeight: 1.5, opacity: 0.7, flex: '2 1 300px', minWidth: 0 }}>
+              {p.short}
+            </span>
+            <span className="mono" style={{ fontSize: 14, flex: 'none', marginLeft: 'auto' }}>
+              →
+            </span>
+          </a>
+        ))}
+      </div>
     </section>
   )
 }

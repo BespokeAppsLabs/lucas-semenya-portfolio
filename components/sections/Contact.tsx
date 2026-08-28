@@ -108,7 +108,11 @@ export default function Contact() {
             Based in
           </p>
           <p className="mono" style={{ fontSize: 13, letterSpacing: '0.1em', margin: 0 }}>
-            South Africa
+            Limpopo + Gauteng, South Africa
+            <br />
+            Lephalale · Polokwane · Pretoria
+            <br />
+            Johannesburg · North West · Mpumalanga
             <br />
             {/* Empty until the client effect runs — avoids a hydration mismatch. */}
             {clock && `${clock} SAST`}

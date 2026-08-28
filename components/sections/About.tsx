@@ -57,7 +57,8 @@ export default function About() {
               </a>{' '}
               — a studio
               building AI-powered products, SaaS platforms, and autonomous agent systems for clients
-              across South Africa.
+              across South Africa. I&rsquo;m based between Limpopo and Gauteng, working across
+              Lephalale, Polokwane, Pretoria, Johannesburg, North West, and Mpumalanga.
             </p>
             <p style={{ margin: 0 }}>
               My work sits where artificial intelligence meets product engineering. I don&rsquo;t

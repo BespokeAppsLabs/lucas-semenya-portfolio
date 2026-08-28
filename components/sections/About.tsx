@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { SOCIAL, STATS } from '@/lib/data'
 
 export default function About() {
@@ -84,12 +85,14 @@ export default function About() {
         </div>
 
         <div data-parallax="-0.05" style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          <div className="shot" style={{ aspectRatio: '4/5' }}>
-            <p className="shot-brief">
-              [ portrait ] — Lucas, three-quarter, hard side light,
-              <br />
-              monitors out of focus behind. Warm bone backdrop.
-            </p>
+          <div className="shot" style={{ aspectRatio: '4/5', padding: 0, overflow: 'hidden' }}>
+            <Image
+              src="/images/Lucas_profile_swarm_4x5.png"
+              alt="Lucas Semenya standing with the FRIDAY, ULTRON, and NOVA robot agents"
+              fill
+              sizes="(max-width: 703px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
 
           <dl

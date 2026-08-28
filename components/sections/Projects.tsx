@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { FEATURED, PROJECT_INDEX, SWARM } from '@/lib/data'
 
 export default function Projects() {
@@ -18,7 +19,7 @@ export default function Projects() {
           className="mono"
           style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(20,18,14,0.5)', margin: 0 }}
         >
-          14 projects · 3 in production at national scale
+          {FEATURED.length + PROJECT_INDEX.length} projects · products, platforms, and private client systems
         </p>
       </div>
 
@@ -35,8 +36,14 @@ export default function Projects() {
               alignItems: 'center',
             }}
           >
-            <div className="shot" style={{ aspectRatio: '16/11' }}>
-              <p className="shot-brief">{p.shot}</p>
+            <div className="shot" style={{ aspectRatio: '16/11', overflow: 'hidden' }}>
+              <Image
+                src={p.logo}
+                alt={`${p.title} logo`}
+                fill
+                sizes="(max-width: 703px) 100vw, 50vw"
+                style={{ objectFit: 'contain', padding: p.logoPadding, background: '#f7f7f4' }}
+              />
               <span
                 className="mono"
                 style={{
@@ -48,6 +55,7 @@ export default function Projects() {
                   background: '#14120E',
                   color: '#EDE9E1',
                   padding: '5px 10px',
+                  zIndex: 1,
                 }}
               >
                 {p.status}
@@ -58,26 +66,6 @@ export default function Projects() {
               <p className="eyebrow" style={{ letterSpacing: '0.16em', marginBottom: 14 }}>
                 {p.category}
               </p>
-
-              {/* ponytail: plain img — these render at 44px tall, the
-                  optimiser has nothing to win. Msaada is low-res: do not
-                  scale it above 44px without a vector from the client. */}
-              {p.logo && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={p.logo}
-                  alt={`${p.title} logo`}
-                  style={{
-                    display: 'block',
-                    height: 44,
-                    width: 'auto',
-                    maxWidth: 220,
-                    objectFit: 'contain',
-                    objectPosition: 'left center',
-                    margin: '0 0 18px',
-                  }}
-                />
-              )}
 
               <h3
                 className="display"
@@ -204,8 +192,9 @@ export default function Projects() {
       </div>
 
       <div style={{ marginTop: 96, borderTop: '1px solid rgba(20,18,14,0.2)' }}>
-        {PROJECT_INDEX.map((p) => (
-          <a key={p.title} href={p.link} className="idx-row">
+        {PROJECT_INDEX.map((p) => {
+          const row = (
+            <>
             <span
               className="display"
               style={{
@@ -233,10 +222,21 @@ export default function Projects() {
               {p.short}
             </span>
             <span className="mono" style={{ fontSize: 14, flex: 'none', marginLeft: 'auto' }}>
-              →
+              {p.link ? '↗' : p.access}
             </span>
-          </a>
-        ))}
+            </>
+          )
+
+          return p.link ? (
+            <a key={p.title} href={p.link} target="_blank" rel="noopener noreferrer" className="idx-row">
+              {row}
+            </a>
+          ) : (
+            <div key={p.title} className="idx-row">
+              {row}
+            </div>
+          )
+        })}
       </div>
     </section>
   )

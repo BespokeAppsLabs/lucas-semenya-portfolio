@@ -83,15 +83,6 @@ export default function Contact() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <a
-              href={SOCIAL.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mono plain-link"
-              style={{ fontSize: 13, letterSpacing: '0.1em' }}
-            >
-              GitHub ↗
-            </a>
-            <a
               href={SOCIAL.linkedin}
               target="_blank"
               rel="noopener noreferrer"

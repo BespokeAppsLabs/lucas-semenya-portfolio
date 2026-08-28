@@ -90,7 +90,7 @@ export const FEATURED = [
     status: 'Shipped',
     link: 'https://carsharenova.com',
     logo: '/logos/carsharenova-ink.png',
-    shot: '[ product ] — CarShareNova app on iPhone,\nheld in-car, 240+ vehicle listings visible.',
+    logoPadding: 'clamp(28px, 6vw, 72px)',
     description:
       "South Africa's peer-to-peer car rental marketplace — 240+ cars across Johannesburg, Cape Town, and Pretoria. Owners list free, renters book in minutes, every trip insured by Old Mutual Insure. Featured on CNBC Africa, 702, Moneyweb, and ITWeb.",
     tech: ['Next.js', 'React Native', 'Node.js', 'TypeScript', 'AWS'],
@@ -100,8 +100,8 @@ export const FEATURED = [
     category: 'Gig Economy · Platform',
     status: 'Shipped',
     link: 'https://msaada.app/',
-    logo: '/logos/msaada.png',
-    shot: '[ documentary ] — SA gig courier on a scooter,\ngolden hour, phone mounted on handlebars.',
+    logo: '/logos/msaada-featured.png',
+    logoPadding: 0,
     description:
       'Empowers gig workers across Uber Eats, Bolt, PicknPay ASAP and Mr D — rent-to-own gear, flexible payment plans, task management, and earnings tracking. Live in production serving thousands.',
     tech: ['React', 'Node.js', 'TypeScript', 'AWS', 'GraphQL'],
@@ -110,9 +110,9 @@ export const FEATURED = [
     title: 'BespokeHQ',
     category: 'AI Platform · Agent Orchestration',
     status: 'Active',
-    link: 'https://github.com/BespokeAppsLab',
-    logo: '',
-    shot: '[ interface ] — dark agent dashboard, task queue,\nlive container logs streaming. Screen capture.',
+    link: 'https://bespokeapps.co.za',
+    logo: '/logos/bespoke-applications-labs-wide.png',
+    logoPadding: 24,
     description:
       'The Agent Intelligence Layer behind Bespoke Applications Labs. A self-hostable, two-layer agent server that accepts tasks via chat, Telegram, webhook, or cron — then dispatches ephemeral Docker containers running Claude Code to execute them autonomously.',
     tech: ['Next.js', 'Docker', 'Claude Code', 'Drizzle', 'Vercel AI SDK'],
@@ -128,61 +128,61 @@ export const PROJECT_INDEX = [
     title: 'Malume',
     category: 'Mobile · SaaS · Transport',
     short: 'School transport platform — live child tracking, digital agreements, recurring billing.',
-    link: '#work',
+    link: null,
+    access: 'Link pending',
   },
   {
-    title: 'bonramCRM',
-    category: 'AI · CRM · Email Intelligence',
-    short: 'Inbox classified by a local model into Convex; agents read records, never mail.',
-    link: '#work',
+    title: 'Bonram',
+    category: 'B2B · Multi-service · Operations',
+    short:
+      'BBBEE Level 1 partner delivering construction, facilities, logistics, sanitation, safety, equipment hire, events, and security.',
+    link: 'https://bonram.co.za',
+    access: 'Public',
   },
   {
     title: 'School Record',
     category: 'EdTech · Multi-tenant SaaS',
     short: 'Multi-tenant school management for South African primary schools.',
-    link: '#work',
+    link: null,
+    access: 'Link pending',
   },
   {
     title: 'The Safety Shelf',
     category: 'Ecommerce · AI · Publishing',
-    short: "AI-illustrated children's safety bookstore with audiobooks and translations.",
-    link: 'https://www.safety-shelf.co.za',
+    short:
+      'AI-driven online bookstore and management platform for practical health and safety guides.',
+    link: 'https://safety-shelf.co.za',
+    access: 'Public',
   },
   {
     title: '555chess',
     category: 'EdTech · Chess Academy',
-    short: 'Every move timed to the millisecond, so coaches teach from evidence not impressions.',
-    link: '#work',
+    short:
+      'Personalised chess tutoring for every level, combining real expert coaches with instrumented learning.',
+    link: 'https://555chess.co.za',
+    access: 'Public',
   },
   {
-    title: 'Kolada',
-    category: 'Hospitality · Web + Mobile',
-    short: 'Ibiza-inspired hospitality platform in a Turborepo monorepo.',
-    link: '#work',
-  },
-  {
-    title: 'Bonram',
-    category: 'Luxury · Hire · Portal',
-    short: 'Quote-first institutional luxury portal with live inventory.',
-    link: '#work',
-  },
-  {
-    title: 'Brushstrokes',
-    category: 'Web · Design Review',
-    short: 'Versioned design review and structured client feedback.',
-    link: '#work',
+    title: 'Bonram Rentals',
+    category: 'Luxury · Events · Rentals',
+    short:
+      'Luxury and professional event rentals for weddings, corporate events, and government functions.',
+    link: 'https://bonramrentals.co.za',
+    access: 'Public',
   },
   {
     title: 'NUM Case Portal',
-    category: 'Enterprise · Legal Systems',
+    category: 'Private Client · Legal Systems',
     short: 'Case management for the National Union of Mineworkers.',
-    link: 'https://technanimals.com/',
+    link: null,
+    access: 'Private client',
   },
   {
     title: 'NSFAS Admin Portal',
-    category: 'GovTech · EdTech',
+    category: 'Private Client · GovTech',
     short: 'Student accommodation allocation for national financial aid.',
-    link: 'https://technanimals.com/',
+    link: null,
+    access: 'Private client',
   },
 ]
 
@@ -283,7 +283,6 @@ export const EXPERIENCE: Role[] = [
 ]
 
 export const SOCIAL = {
-  github: 'https://github.com/BespokeAppsLab',
   linkedin: 'https://www.linkedin.com/in/lucas-semenya-50665564/',
   email: 'lucas@bespokeapps.co.za',
   domain: 'lucassemenya.co.za',
